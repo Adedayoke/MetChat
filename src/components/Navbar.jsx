@@ -17,7 +17,7 @@ function Navbar() {
 
     return (
       <div className="navbar">
-         <span className="logo">METLAD chat</span>
+         <span className="logo">HEchat</span>
          <div className="user">
           <img src={currentUser.photoURL} alt="" />
           <span>{currentUser.displayName}</span>

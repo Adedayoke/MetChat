@@ -18,8 +18,8 @@ function Message({message}) {
           <span>Just Now</span>
          </div>
          <div className="messageContent">
-          <p>{message.text}</p>
-          {message.image && <img src={message.image} alt="" />}
+          <p>{message.text && message.text}</p>
+          {message?.img && <img src={message?.img} alt="" />}
          </div>
       </div>
     );

@@ -7,7 +7,7 @@ import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase
 import { db } from "../firebase";
 import {v4 as uuid} from "uuid"
 import { storage } from "../firebase";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 
 
 
@@ -21,37 +21,23 @@ function Input() {
 
 
   const handleSend = async function(){
-
-    
     if(image){
-
-  
       const storageRef = ref(storage, uuid());
-      const uploadTask = uploadBytesResumable(storageRef, image)
-         
-        uploadTask.on(
-      
-          (error) => {
-            
-          }, 
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-              await updateDoc(doc(db, "chats", data.chatId), 
-              {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text,
-                  senderId : currentUser.uid,
-                  date: Timestamp.now(),
-                  img: downloadURL
-                })
-              }
-            )
-            });
+      await uploadBytes(storageRef, image).then(()=>{
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          await updateDoc(doc(db, "chats", data.chatId), 
+          {
+             messages: arrayUnion({
+              id: uuid(),
+              text,
+              senderId : currentUser.uid,
+              date: Timestamp.now(),
+              img: downloadURL
+            })
           }
-        );
-
-      
+        )
+        });
+      })    
     }else{
       await updateDoc(doc(db, "chats", data.chatId), 
               {
@@ -67,7 +53,6 @@ function Input() {
     await updateDoc(doc(db, "userChat", currentUser.uid), {
       [data.chatId + ".lastMessage"] : {text},
       [data.chatId + ".date"] : serverTimestamp()
-
     })
     await updateDoc(doc(db, "userChat", data.user.uid), {
       [data.chatId + ".lastMessage"] : {text},

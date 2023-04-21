@@ -20,8 +20,9 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       onAuthStateChanged(auth, (user) => {
         if (user) {
-            setCurrentUser(user)
-            navigate("/")
+          setCurrentUser(user)
+          console.log('userSet')
+          navigate("/")
         }
     }); 
     }catch(err){

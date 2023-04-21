@@ -13,7 +13,7 @@ function Search() {
   const handleSearch = async function(){
 
     const colRef = collection(db, "users")
-    const q = query(colRef, where("displayName", "==", username))
+    const q = query(colRef, where("displayName", "==", username.toLowerCase()))
     try{
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -30,11 +30,13 @@ function Search() {
     e.code === "Enter" && handleSearch()
   }
   const handleSelect = async function(){
+
     const combineId = currentUser.uid > user.uid 
     ? currentUser.uid + user.uid 
     : user.uid + currentUser.uid
-
-
+    console.log(currentUser)
+    console.log(user.uid)
+    console.log(combineId)
     try{
       const res = await getDoc(doc(db, "chats", combineId));
       // console.log(!res.exists())
