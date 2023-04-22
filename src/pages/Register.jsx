@@ -31,7 +31,7 @@ function Register() {
     try{
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const storageRef = ref(storage, `images/${file.name}`);
+      const storageRef = ref(storage, `${file.name}`);
       await uploadBytes(storageRef, file).then(()=>{
         getDownloadURL(storageRef).then(async (downloadURL) => {
             
