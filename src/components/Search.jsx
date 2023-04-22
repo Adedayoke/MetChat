@@ -6,7 +6,7 @@ import { db } from "../firebase";
 function Search() {
   const [username, setUserName] = useState("")
   const [user, setUser] = useState(null)
-  const [err, setErr] = useState("")
+  const [err, setErr] = useState(false)
 
 
   const {currentUser} = useContext(AuthContext)
@@ -28,6 +28,9 @@ function Search() {
   
   const handleKey = function(e){
     e.code === "Enter" && handleSearch()
+  }
+  const handleSearchSubmit = function(e){
+    username !== "" && handleSearch()
   }
   const handleSelect = async function(){
 
@@ -72,8 +75,9 @@ function Search() {
     return (
       <div className="search">
         <div className="searchForm">
-          <input placeholder="find a user" type="text" onKeyDown={handleKey} onChange={(e)=>setUserName(e.target.value) } value={username}/>
-        </div> 
+          <input placeholder="Find a user" type="text" onKeyDown={handleKey} onChange={(e)=>setUserName(e.target.value) } value={username}/>
+          <button onClick={()=> handleSearchSubmit()}>Search</button>
+        </div>
         {err && <p>User not found</p>}
         {user && <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt=""/>
