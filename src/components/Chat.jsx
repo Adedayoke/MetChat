@@ -22,7 +22,7 @@ function Chat() {
     })
   }
     return (
-      <div className={viewingState.viewingChat ? "chat chatsmSet" : "chat chatsmSetShow" }>
+      <div className={viewingState.viewingChat ? "chat chatsmSetHide" : "chat chatsmSetShow" }>
           {currentdata.currentChat ?<>
             <div className="chatInfo">
             <span>

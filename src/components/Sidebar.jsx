@@ -7,7 +7,7 @@ import { NavigateContext } from "../context/NavigateContext";
 function Sidebar() {
   const {viewingState } = useContext(NavigateContext)
     return (
-      <div className={viewingState.viewingChat ? "sidebar sidebarsmSet": "sidebar sidebarsmSetHide"}>
+      <div className={viewingState.viewingChat ? "sidebar sidebarsmSetShow": "sidebar sidebarsmSetHide"}>
           <Navbar />
           <Search />
           <Chats />

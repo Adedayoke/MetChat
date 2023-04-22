@@ -222,6 +222,17 @@
                     background-color: #2a3942;
                 }
             }
+            @media (max-width: 600px){
+                &.sidebarsmSetShow{
+                    width: 100% !important;
+                    flex-basis: 100% !important;
+                }
+                &.sidebarsmSetHide{
+                    width: 0% !important;
+                    flex-basis: 0 !important;
+                    transform: translate3d(-50vw,0,0) !important;
+                }
+            }
         }
         .chat{
             flex-basis: 70%;
@@ -242,7 +253,7 @@
                     padding: 5px;
                     display:  none;
                 }
-                @media only screen and (max-width: 600px){
+                @media (max-width: 600px){
                     .backArrow{
                         display: inline-block;
                     }
@@ -379,31 +390,22 @@
                 }
 
             }
-            
-        }
-        @media only screen and (max-width: 600px){
-            .chatsmSet {
-                transform: translate3d(100vw,0,0);
-                flex-basis: 0%;
-                background-color: red;
-                width: 0;
-            }
-            .chatsmSetShow {
-                flex-basis: 100%;
-                width: 100%;
-            }
-            .sidebarsmSet{
-                width: 100%;
-                flex-basis: 100%;
-            }
-            .sidebarsmSetHide{
-                width: 0%;
-                flex-basis: 0;
-                transform: translate3d(-50vw,0,0);
+            @media (max-width: 600px){
+                &.chatsmSetHide {
+                    transform: translate3d(100vw,0,0) !important;
+                    flex-basis: 0% !important;
+                    width: 0% !important;
+                }
+                &.chatsmSetShow {
+                    flex-basis: 100% !important;
+                    width: 100% !important;
+                    transform: translate3d(0,0,0) !important;
+                }
             }
         }
+        
     }
-    @media only screen and (max-width: 600px){
+    @media (max-width: 600px){
         .container{
             width: 100%;
         }
