@@ -13,7 +13,7 @@ import { getFirestore } from "firebase/firestore";
 // };
 
 const firebaseConfig = {
-  apiKey: `${process.env.API_KEY}`,
+  apiKey: "AIzaSyAcpuRweOLws-QJq_DPliy_ngvvrn57PoY",
   authDomain: "chatfrust.firebaseapp.com",
   projectId: "chatfrust",
   storageBucket: "chatfrust.appspot.com",
