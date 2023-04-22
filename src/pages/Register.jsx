@@ -53,9 +53,10 @@ function Register() {
             }
           }); 
           navigate("/")
-        }).catch((err)=>{
-          ErrorFunction(err)
         })
+        // .catch((err)=>{
+        //   ErrorFunction(err)
+        // })
       }).catch((err)=> {
         ErrorFunction(err)
       })
