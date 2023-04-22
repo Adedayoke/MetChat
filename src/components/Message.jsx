@@ -14,7 +14,7 @@ function Message({message}) {
       <div ref={ref} className={`message ${message.senderId === currentUser.uid && "owner"}`}>
          <div className="messageInfo">
           <img src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} alt="" />
-          <span>Just Now</span>
+          {/* <span>Just Now</span> */}
          </div>
          <div className="messageContent">
           <p>{message.text && message.text}</p>

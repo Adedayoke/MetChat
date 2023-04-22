@@ -3,14 +3,14 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from '../context/ChatContext';
-//import { CurrentChatContext } from "../context/CurrentChatContext";
+import { CurrentChatContext } from "../context/CurrentChatContext";
 import { NavigateContext } from "../context/NavigateContext";
 
 
 function Chats() {
   const {currentUser} = useContext(AuthContext)
   const {dispatch} = useContext(ChatContext)
- // const {currentdata, currentdispatch} = useContext(CurrentChatContext)
+  const {currentdispatch} = useContext(CurrentChatContext)
   const {changeViewdispatch} = useContext(NavigateContext)
   const [chats, setChats] = useState([]);
  // const [onview, setonview] = useState(false);
@@ -34,14 +34,13 @@ function Chats() {
       type: "CHANGE_USER",
       payload: user
     })
-    // currentdispatch({
-    //   type: "CHANGE_CURRENT_CHAT",
-    //   payload: user
-    // })
+    currentdispatch({
+      type: "CHANGE_CURRENT_CHAT",
+      payload: user
+    })
     changeViewdispatch({
       type: "CHANGE_VIEWING_STATE_FALSE",
     })
-    console.log(user)
   }
 
     return (

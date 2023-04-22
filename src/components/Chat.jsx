@@ -21,8 +21,6 @@ function Chat() {
       type: "CHANGE_VIEWING_STATE_TRUE"
     })
   }
-  // console.log(data)
-  console.log(currentdata)
     return (
       <div className={viewingState.viewingChat ? "chat chatsmSet" : "chat chatsmSetShow" }>
           {currentdata.currentChat ?<>
