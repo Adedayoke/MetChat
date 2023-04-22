@@ -14,12 +14,13 @@ function Register() {
   const {setCurrentUser} = useContext(AuthContext)
   const [loaderState, setLoaderState] =  useState(false)
 
-  const ErrorFunction = () => {
+  const ErrorFunction = (err) => {
     setErr(true)
       setLoaderState(false)
       setTimeout(()=>{
         setErr(false)
       }, 3000)
+      console.log(err)
   }
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -44,10 +45,7 @@ function Register() {
             displayName: displayName.toLowerCase(),
             email:email,
             photoURL:downloadURL
-          }).catch((e)=>{
-            console.log(e)
           })
-          
           await setDoc(doc(db, "userChat", res.user.uid), {});
           onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -55,10 +53,14 @@ function Register() {
             }
           }); 
           navigate("/")
-        }).catch(ErrorFunction())
-      }).catch(ErrorFunction())
+        }).catch((err)=>{
+          ErrorFunction(err)
+        })
+      }).catch((err)=> {
+        ErrorFunction(err)
+      })
     }catch(err){
-      ErrorFunction()
+      ErrorFunction(err)
     }
     
       
