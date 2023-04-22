@@ -4,6 +4,7 @@ import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
 import { ChatContextProvider } from './context/ChatContext';
 import { CurrentChatContextProvider } from './context/CurrentChatContext';
+import { NavigateProvider } from './context/NavigateContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,7 +12,9 @@ root.render(
     <AuthContextProvider>
       <ChatContextProvider>
         <CurrentChatContextProvider>
+          <NavigateProvider>
           <App />
+          </NavigateProvider>
         </CurrentChatContextProvider>
       </ChatContextProvider>
     </AuthContextProvider>

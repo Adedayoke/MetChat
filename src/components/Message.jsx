@@ -10,7 +10,6 @@ function Message({message}) {
   useEffect(()=>{
     ref.current?.scrollIntoView({behaviour:"smooth"})
   }, [message])
-  console.log(message)
     return (
       <div ref={ref} className={`message ${message.senderId === currentUser.uid && "owner"}`}>
          <div className="messageInfo">

@@ -4,20 +4,33 @@ import More from '../img/more.png'
 import Messages from './Messages';
 import Input from './Input';
 import { ChatContext } from '../context/ChatContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CurrentChatContext } from "../context/CurrentChatContext";
+import {BiArrowBack} from "react-icons/bi"
+import { NavigateContext } from "../context/NavigateContext";
 
 
 function Chat() {
   const {currentdata} = useContext(CurrentChatContext)
   const {data} = useContext(ChatContext)
+  const [chatsmSet, setchatsmSet] = useState(false)
+  const {viewingState, changeViewdispatch } = useContext(NavigateContext)
+
+  const handleViewState = ()=>{
+    changeViewdispatch({
+      type: "CHANGE_VIEWING_STATE_TRUE"
+    })
+  }
   // console.log(data)
   console.log(currentdata)
     return (
-      <div className="chat">
+      <div className={viewingState.viewingChat ? "chat chatsmSet" : "chat chatsmSetShow" }>
           {currentdata.currentChat ?<>
             <div className="chatInfo">
-            <span>{data.user.displayName}</span>
+            <span>
+              <span onClick={handleViewState} className='backArrow'><BiArrowBack /></span>
+              {data.user.displayName}
+            </span>
             <div className="chatIcons">
               <img src={Cam} alt="" />
               <img src={Add} alt="" />

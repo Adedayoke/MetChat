@@ -3,16 +3,17 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from '../context/ChatContext';
-import { CurrentChatContext } from "../context/CurrentChatContext";
-
+//import { CurrentChatContext } from "../context/CurrentChatContext";
+import { NavigateContext } from "../context/NavigateContext";
 
 
 function Chats() {
   const {currentUser} = useContext(AuthContext)
   const {dispatch} = useContext(ChatContext)
-  const {currentdispatch} = useContext(CurrentChatContext)
-
+ // const {currentdata, currentdispatch} = useContext(CurrentChatContext)
+  const {changeViewdispatch} = useContext(NavigateContext)
   const [chats, setChats] = useState([]);
+ // const [onview, setonview] = useState(false);
   useEffect(()=>{
     
     const getChats = ()=>{
@@ -33,9 +34,12 @@ function Chats() {
       type: "CHANGE_USER",
       payload: user
     })
-    currentdispatch({
-      type: "CHANGE_CURRENT_CHAT",
-      payload: user
+    // currentdispatch({
+    //   type: "CHANGE_CURRENT_CHAT",
+    //   payload: user
+    // })
+    changeViewdispatch({
+      type: "CHANGE_VIEWING_STATE_FALSE",
     })
     console.log(user)
   }
@@ -46,7 +50,7 @@ function Chats() {
         chats && 
         Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat)=>{
           return( 
-            <div key={chat[0]} className="userChat" onClick={()=>handleselect(chat[1].userInfo)}>
+            <div key={chat[0]} className={"userChat"} onClick={()=>handleselect(chat[1].userInfo)}>
               <img src={chat[1].userInfo.photoURL} alt=""/>
               <div className="userChatInfo">
                 <span>{chat[1].userInfo.displayName}</span>

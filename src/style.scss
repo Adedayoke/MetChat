@@ -127,9 +127,10 @@
         overflow: hidden;
         
         .sidebar{
-            flex: 1;
+            flex-basis: 30%;
             border-right: 1px solid #aebac1;
             // background-color: #3e3c61;
+            width: 100%;
             background-color: #111b21;
 
             .navbar{
@@ -217,10 +218,14 @@
                         color: lightgray;
                     }
                 }
+                &.current{
+                    background-color: #2a3942;
+                }
             }
         }
         .chat{
-            flex: 2;
+            flex-basis: 70%;
+            transition: all .2s;
             .chatInfo{
                 height: 50px;
                 background-color: #202c33;
@@ -232,6 +237,16 @@
                 font-weight: 400;
                 text-transform: capitalize;
                 font-family: sans-serif;
+                .backArrow{
+                    margin-right: 10px;
+                    padding: 5px;
+                    display:  none;
+                }
+                @media only screen and (max-width: 600px){
+                    .backArrow{
+                        display: inline-block;
+                    }
+                }
             }
             .nochatInfo{
                 display: flex;
@@ -362,10 +377,33 @@
                         cursor: pointer;
                     }
                 }
+
+            }
+            
+        }
+        @media only screen and (max-width: 600px){
+            .chatsmSet {
+                transform: translate3d(100vw,0,0);
+                flex-basis: 0%;
+                background-color: red;
+                width: 0;
+            }
+            .chatsmSetShow {
+                flex-basis: 100%;
+                width: 100%;
+            }
+            .sidebarsmSet{
+                width: 100%;
+                flex-basis: 100%;
+            }
+            .sidebarsmSetHide{
+                width: 0%;
+                flex-basis: 0;
+                transform: translate3d(-50vw,0,0);
             }
         }
     }
-    @media (max-width: 780px){
+    @media only screen and (max-width: 600px){
         .container{
             width: 100%;
         }
