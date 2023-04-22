@@ -37,18 +37,19 @@ function Input() {
           }
         )
         });
-      })    
+      })
+      setText("")   
     }else{
       await updateDoc(doc(db, "chats", data.chatId), 
-              {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text,
-                  senderId : currentUser.uid,
-                  date: Timestamp.now(),
-                })
-              }
-            )
+        {
+          messages: arrayUnion({
+          id: uuid(),
+          text,
+          senderId : currentUser.uid,
+          date: Timestamp.now(),
+        })
+      })
+      setText("")
     }
     await updateDoc(doc(db, "userChat", currentUser.uid), {
       [data.chatId + ".lastMessage"] : {text},
